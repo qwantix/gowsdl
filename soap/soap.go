@@ -343,6 +343,11 @@ func (s *Client) call(ctx context.Context, soapAction string, request, response 
 	}
 	defer res.Body.Close()
 
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(res.Body)
+	fmt.Println("-- res --")
+	fmt.Println(buf.String())
+	fmt.Println("-- end --")
 	respEnvelope := new(SOAPEnvelope)
 	respEnvelope.Body = SOAPBody{Content: response}
 
